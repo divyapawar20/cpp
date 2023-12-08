@@ -1,0 +1,142 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+// Function prototypes
+void add(ofstream &file);
+void sub(ofstream &file);
+void multi(ofstream &file);
+void division(ofstream &file);
+void sqr(ofstream &file);
+void srt(ofstream &file);
+
+int main() {
+    int opr;
+    ofstream file("C:\\Program Files\\Sublime Text\\sublime_python\\Calculator_history.txt");
+
+    do {
+        cout << "Select any operation from the C++ Calculator"
+             << "\n1 = Addition"
+             << "\n2 = Subtraction"
+             << "\n3 = Multiplication"
+             << "\n4 = Division"
+             << "\n5 = Square"
+             << "\n6 = Square Root"
+             << "\n7 = Exit"
+             << "\n \n Make a choice: ";
+        cin >> opr;
+
+        switch (opr) {
+            case 1:
+                add(file);
+                break;
+            case 2:
+                sub(file);
+                break;
+            case 3:
+                multi(file);
+                break;
+            case 4:
+                division(file);
+                break;
+            case 5:
+                sqr(file);
+                break;
+            case 6:
+                srt(file);
+                break;
+            case 7:
+                file.close(); // Close the file before exiting
+                exit(0);
+                break;
+            default:
+                cout << "Something is wrong..!!";
+                break;
+        }
+
+        cout << " \n------------------------------\n";
+    } while (opr != 7);
+
+    return 0;
+}
+
+void add(ofstream &file) {
+    int n, sum = 0, i, number;
+    cout << "How many numbers you want to add: ";
+    cin >> n;
+    file << "Addition: ";
+    for (i = 1; i <= n; i++) {
+        cin >> number;
+        sum += number;
+        file << number << " ";
+    }
+    file << "= " << sum << endl;
+    cout << "\n Sum of the numbers = " << sum;
+}
+
+void sub(ofstream &file) {
+    int num1, num2, z;
+    cout << "\n Enter the First number = ";
+    cin >> num1;
+    cout << "\n Enter the Second number = ";
+    cin >> num2;
+    file << "Subtraction: " << num1 << " - " << num2 << " = ";
+    z = num1 - num2;
+    file << z << endl;
+    cout << "\n Subtraction of the numbers = " << z;
+}
+
+void multi(ofstream &file) {
+    int num1, num2, mul;
+    cout << "\n Enter the First number = ";
+    cin >> num1;
+    cout << "\n Enter the Second number = ";
+    cin >> num2;
+    file << "Multiplication: " << num1 << " * " << num2 << " = ";
+    mul = num1 * num2;
+    file << mul << endl;
+    cout << "\n Multiplication of two numbers = " << mul;
+}
+
+void division(ofstream &file) {
+    int num1, num2, div = 0;
+    cout << "\n Enter the First number = ";
+    cin >> num1;
+    cout << "\n Enter the Second number = ";
+    cin >> num2;
+
+    while (num2 == 0) {
+        cout << "\n Divisor cannot be zero"
+             << "\n Please enter the divisor once again: ";
+        cin >> num2;
+    }
+
+    file << "Division: " << num1 << " / " << num2 << " = ";
+    div = num1 / num2;
+    file << div << endl;
+    cout << "\n Division of two numbers = " << div;
+}
+
+void sqr(ofstream &file) {
+    int num1;
+    cout << "\n Enter a number to find the Square: ";
+    cin >> num1;
+    file << "Square: " << num1 << "^2 = ";
+    int sq = num1 * num1;
+    file << sq << endl;
+    cout << "\n Square of " << num1 << " is : " << sq;
+}
+
+void srt(ofstream &file) {
+    float q;
+    int num1;
+    cout << "\n Enter the number to find the Square Root:";
+    cin >> num1;
+    file << "Square Root: sqrt(" << num1 << ") = ";
+    q = sqrt(num1);
+    file << q << endl;
+    cout << "\n Square Root of " << num1 << " is : " << q;
+}
+
